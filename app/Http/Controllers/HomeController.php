@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $logged_in_to_router =false;
+        $logged_in_to_router = true;
         //if you logged in to router 
         if ($logged_in_to_router) {
             return view('home');
