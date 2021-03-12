@@ -22,9 +22,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $logged_in_to_router =false;
+        if($request->session()->exists('router_session')){
+            $logged_in_to_router =true;
+        }else{
+            $logged_in_to_router =false;
+        }
         //if you logged in to router 
         if ($logged_in_to_router) {
             return view('home');
@@ -54,9 +58,14 @@ class HomeController extends Controller
             'pass' => $data['password'],
             'port' => $data['port'],
         ]);
-        $client = new \RouterOS\Client($config);
 
-        dd($config);
+        try {
+          $client = new RouterOS\Client($data['host'], $data['user'],$data['pass'],$data['port']);            
+         } catch (\Exception $e) {
+            return redirect()->back()->with('error','Could Not Login To Router');
+        }
+        $request->session()->put('router_session', $client);
+        return redirect('/home');
 
     }
 }
