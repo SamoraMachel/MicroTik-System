@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-=======
 use \RouterOS;
->>>>>>> 15ba8f98f8ec17449b98411d8a5cced7ff8d9188
 
 class HomeController extends Controller
 {
@@ -27,9 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        return view('home');
-=======
         $logged_in_to_router =false;
         //if you logged in to router 
         if ($logged_in_to_router) {
@@ -64,6 +58,5 @@ class HomeController extends Controller
 
         dd($config);
 
->>>>>>> 15ba8f98f8ec17449b98411d8a5cced7ff8d9188
     }
 }
