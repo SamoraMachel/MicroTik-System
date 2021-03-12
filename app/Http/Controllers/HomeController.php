@@ -56,11 +56,11 @@ class HomeController extends Controller
             'host' => $data['ip'],
             'user' => $data['username'],
             'pass' => $data['password'],
-            'port' => $data['port'],
+            'port' => intval($data['port']),
         ]);
 
         try {
-          $client = new RouterOS\Client($data['host'], $data['user'],$data['pass'],$data['port']);            
+          $client = new RouterOS\Client($config);            
          } catch (\Exception $e) {
             return redirect()->back()->with('error','Could Not Login To Router');
         }

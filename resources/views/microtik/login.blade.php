@@ -14,12 +14,15 @@
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Router Login</h2>
+                    @if(session('error'))
+                        <h3 class="text-danger">{{session('error')}}</h3>
+                    @endif
                     <form action="{{route('router_verify')}}" method="POST">
                         @csrf
                         <div class="row row-space">
                             <div class="col-6">
                                 <div class="input-group">
-                                    <input class="input--style-2" type="text" placeholder="Remote Router IP Address" name="ip">
+                                    <input value="{{@old('ip')}}"  class="input--style-2" type="text" placeholder="Remote Router IP Address" name="ip">
 
                                     @error('ip')
                                         <span class="text-danger font-weight-bold">{{$message}}</span>
@@ -31,7 +34,7 @@
                         <div class="row row-space">
                             <div class="col-6">
                                 <div class="input-group">
-                                    <input class="input--style-2" type="text" placeholder="Username" name="username">
+                                    <input value="{{@old('username')}}"  class="input--style-2" type="text" placeholder="Username" name="username">
                                      @error('username')
                                         <span class="text-danger font-weight-bold">{{$message}}</span>
                                     @enderror
@@ -53,7 +56,7 @@
                         <div class="row row-space">
                             <div class="col-6">
                                 <div class="input-group">
-                                    <input class="input--style-2" type="number" placeholder="Port" name="port">
+                                    <input  value="{{@old('port')}}" class="input--style-2" type="number" placeholder="Port" name="port">
                                     @error('port')
                                         <span class="text-danger font-weight-bold">{{$message}}</span>
                                     @enderror
