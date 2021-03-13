@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+<<<<<<< HEAD
 Route::get('/test', function () {
     $config = new \RouterOS\Config([
         'host' => '192.168.88.1',
@@ -23,6 +24,9 @@ Route::get('/test', function () {
     $client = new \RouterOS\Client($config);
     dd($client);
 });
+=======
+Route::get('/test', [App\Http\Controllers\GuestController::class, 'lipaNaMpesaPassword']);
+>>>>>>> ac913a7865316ba8996f2dd59cd8ea4221fc0e27
 
 Auth::routes();
 
