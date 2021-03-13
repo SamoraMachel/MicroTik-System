@@ -23,7 +23,9 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
-    {
+    {   
+        // $data  = session('router_session');
+        // dd($data->config);
         if($request->session()->exists('router_session')){
             $logged_in_to_router =true;
         }else{
@@ -63,7 +65,7 @@ class HomeController extends Controller
         try {
           $client = new RouterOS\Client($config);            
          } catch (\Exception $e) {
-            return redirect()->back()->with('error','Could Not Login To Router');
+            return redirect()->back()->with('error', $e);
         }
         $request->session()->put('router_session', $client);
         return redirect('/home');
