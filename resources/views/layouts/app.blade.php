@@ -18,7 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ URL("css/routerLogin.css") }}" rel="stylesheet" media="all">
+    <link href="{{ asset("css/routerLogin.css") }}" rel="stylesheet" media="all">
 </head>
 <body>
     <div id="app">

@@ -24,20 +24,17 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-<<<<<<< HEAD
-        $logged_in_to_router = true;
-=======
         if($request->session()->exists('router_session')){
             $logged_in_to_router =true;
         }else{
             $logged_in_to_router =false;
         }
->>>>>>> ac913a7865316ba8996f2dd59cd8ea4221fc0e27
         //if you logged in to router 
         if ($logged_in_to_router) {
             return view('home');
         }else{
             return redirect(route('router_login'));
+            // return view('home');
         }
         //else redirect to router login page
     }
