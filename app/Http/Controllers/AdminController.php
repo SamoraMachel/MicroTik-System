@@ -98,7 +98,7 @@ class AdminController extends Controller
     */
     public function showForm(){
         $profiles = $this->userProfiles();        
-        return view('admin.profiles.create-profile', compact('profiles'));
+        return view('admin.profiles.create-profile');
     }
 
 
@@ -107,7 +107,7 @@ class AdminController extends Controller
        'name'=>'required|string|unique:profiles',
        'shared-users'=>'required|numeric',
        'rate-limit' =>'nullable',
-       'price'=>'numeric',
+       'price'=>'required|numeric',
        'status-autorefresh'=>'nullable',
        'transparent-proxy'=>'nullable',
      ]);
@@ -138,6 +138,11 @@ class AdminController extends Controller
     $this->connection();
     $response = $this->client->query($query)->read();
     dd($response);
+   }
+
+   public function listProfiles(){
+    $profiles = Profile::all();
+    return view('admin.profiles.show-profiles', compact('profiles'));
    }
 
 }

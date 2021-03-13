@@ -20,7 +20,10 @@
 
                     @csrf 
                     <div class="input-group">
-                        <input class="input--style-2" type="text" placeholder="Package Name" name="name" value={{ @old('ip') }}>
+                        <input class="input--style-2" type="text" placeholder="Package Name" name="name" value={{ @old('name') }}>
+                        @error('name')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
                     </div>
 
                     <div class="input-group">
