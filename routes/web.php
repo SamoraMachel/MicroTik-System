@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', [App\Http\Controllers\GuestController::class, 'lipaNaMpesaPassword']);
+Route::get('/test', [App\Http\Controllers\GuestController::class, 'ip']);
 Route::get('/', function(){
 	return view('welcome');
 });

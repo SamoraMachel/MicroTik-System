@@ -63,7 +63,7 @@ class HomeController extends Controller
         try {
           $client = new RouterOS\Client($config);            
          } catch (\Exception $e) {
-            return redirect()->back()->with('error','Could Not Login To Router');
+            return redirect()->back()->with('error', $e);
         }
         $request->session()->put('router_session', $client);
         return redirect('/home');

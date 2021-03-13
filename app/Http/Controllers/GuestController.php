@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use RouterOS\Client;
-use RouterOS\Config;
-use RouterOS\Query;
+use RouterOS;
 use Carbon\Carbon;
 
 class GuestController extends Controller
 { 
 	protected $client;
-	// public function __construct(){
-	// 	$this->connection();
-	// }
+	 public function __construct(){
+		$this->connection();
+	 }
 
    public function packages(){
    	//get packages from the db
@@ -21,26 +19,37 @@ class GuestController extends Controller
    }
 
    public function connection(){
-      //dd(env('REMOTE_ROUTER_HOST'));
-      $config = (new Config())
-      ->set('host', env('REMOTE_ROUTER_HOST'))
-      ->set('user', env('REMOTE_ROUTER_USER'))
-      ->set('pass', env('REMOTE_ROUTER_PASS'))
-      ->set('port', intval(env('REMOTE_ROUTER_PORT')));
-   	try {
-   	  $this->client = new Client($config);            
-   	 } catch (\Exception $e) {   	   
-         $this->client = "null"; 
-         print "Error connecting to RouterOS";
-         die;   
-   	}
+      $config = new \RouterOS\Config([
+          'host' => env('REMOTE_ROUTER_HOST'),
+          'user' => env('REMOTE_ROUTER_USER'),
+          'pass' => env('REMOTE_ROUTER_PASS'),
+          'port' => intval(env('REMOTE_ROUTER_PORT')),
+      ]);
+
+      try {
+        $this->client = new RouterOS\Client($config);            
+       } catch (\Exception $e) {
+          dd($e);
+      }      
    }
 
    public function userProfiles(){
-      $query = new Query('/ip/hotspot/user/profile/print');
+      $query = new RouterOS\Query('/ip/hotspot/user/profile/print');
 
       // Add user
-      return $this->client->query($query)->read();
+      $userProfiles = $this->client->query($query)->read();
+      dd($userProfiles);
+   }
+
+   public function newProfile(){
+    $query =
+        (new RouterOs\Query('/ip/hotspot/ip-binding/add'))
+            ->equal('mac-address', '00:00:00:00:40:30')
+            ->equal('type', 'Test')
+            ->equal('comment', 'testcomment');
+
+    // Add user
+    dd($this->client->query($query)->read());
    }
 
    public function access_token()
@@ -70,6 +79,14 @@ class GuestController extends Controller
 
       $lipa_na_mpesa_password = base64_encode($BusinessShortCode.$passkey.$lipa_time);
       return $lipa_na_mpesa_password;
+   }
+
+   public function ip(){
+    $query = new RouterOs\Query('/arp/print');
+
+    // Send query to RouterOS
+    $response = $this->client->query($query)->read();
+    dd($response);
    }
 }
 
