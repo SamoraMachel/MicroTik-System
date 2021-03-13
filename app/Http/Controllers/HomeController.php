@@ -23,7 +23,9 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
-    {
+    {   
+        // $data  = session('router_session');
+        // dd($data->config);
         if($request->session()->exists('router_session')){
             $logged_in_to_router =true;
         }else{

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use RouterOS;
 use Carbon\Carbon;
+use App\Models\Profile;
 
 class GuestController extends Controller
 { 
@@ -18,6 +19,11 @@ class GuestController extends Controller
    	
    }
 
+   public function welcome(){
+    $packages = Profile::all();
+    return view('welcome', compact($packages));
+   }
+
    public function connection(){
       $config = new \RouterOS\Config([
           'host' => env('REMOTE_ROUTER_HOST'),
@@ -29,7 +35,7 @@ class GuestController extends Controller
       try {
         $this->client = new RouterOS\Client($config);            
        } catch (\Exception $e) {
-          dd($e);
+          return;
       }      
    }
 
@@ -41,12 +47,13 @@ class GuestController extends Controller
       dd($userProfiles);
    }
 
-   public function newProfile(){
+   public function ipbindings(){
     $query =
         (new RouterOs\Query('/ip/hotspot/ip-binding/add'))
-            ->equal('mac-address', '00:00:00:00:40:30')
-            ->equal('type', 'Test')
-            ->equal('comment', 'testcomment');
+            ->equal('mac-address', '00:00:00:00:41:30')
+            ->equal('type', 'regular')
+            ->equal('address', '192.168.88.34')
+            ->equal('comment', 'This is just another test');
 
     // Add user
     dd($this->client->query($query)->read());
@@ -82,12 +89,13 @@ class GuestController extends Controller
    }
 
    public function ip(){
-    $query = new RouterOs\Query('/arp/print');
+    $query = new RouterOs\Query('/ip/arp/print');
 
     // Send query to RouterOS
     $response = $this->client->query($query)->read();
     dd($response);
    }
+
 }
 
 
