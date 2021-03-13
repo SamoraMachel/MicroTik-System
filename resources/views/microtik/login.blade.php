@@ -8,7 +8,7 @@
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Router Login</h2>
-                    <form method="POST" action="{{ route("router_verify ") }}">
+                    <form method="POST" action="{{ route("router_verify") }}">
                         
                         <div class="input-group">
                             <input class="input--style-2" type="text" placeholder="IP Address" name="ip" value={{ @old('ip') }}>
@@ -37,7 +37,3 @@
 
     @endsection
 
-</body>
-
-</html>
-<!-- end document-->
