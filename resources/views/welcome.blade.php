@@ -87,6 +87,7 @@
                                         <div class="card bg-dark text-center text-white p-4">
                                             <!-- Header -->
                                             <header class="card-header border-0">
+                                                <h1 class="h3 text-warning mb-3">Basic</h1>
                                                 <div class="pricing-value border-white">
                                                     <span class="display-2 font-weight-bold">
                                                         <span class="font-medium">Ksh. </span>20
@@ -117,6 +118,7 @@
                                         <div class="card bg-dark text-center text-white p-4">
                                             <!-- Header -->
                                             <header class="card-header border-0">
+                                                <h1 class="h3 text-warning mb-3">Regular</h1>
                                                 <div class="pricing-value border-white">
                                                     <span class="display-2 font-weight-bold">
                                                         <span class="font-medium">Ksh. </span>50
@@ -146,6 +148,7 @@
                                         <div class="card bg-dark text-center text-white p-4">
                                             <!-- Header -->
                                             <header class="card-header border-0">
+                                                <h1 class="h3 text-warning mb-3">Premium</h1>
                                                 <div class="pricing-value border-white">
                                                     <span class="display-2 font-weight-bold">
                                                         <span class="font-medium">Ksh. </span>100
@@ -187,34 +190,3 @@
 </html>
 
 
-
-{{-- 
-    
-    <div class="col-md-6 col-lg-4">
-                            <!-- Pricing Card -->
-                            <div class="pricing-card mt-3">
-                                <div class="card bg-light text-center text-dark p-4">
-                                    <!-- Header -->
-                                    <header class="card-header border-0">
-                                        <div class="pricing-value border-dark">
-                                            <span class="display-2 font-weight-bold">
-                                                <span class="font-medium">$</span>79
-                                            </span>
-                                        </div>
-                                    </header>
-                                    <!-- End Header -->
-                                    <!-- Content -->
-                                    <div class="card-body">
-                                        <ul class="list-group mb-4">
-                                            <li class="list-group-item">Community support</li>
-                                            <li class="list-group-item">15 GB SSD storage</li>
-                                            <li class="list-group-item">One-click staging site</li>
-                                        </ul>
-                                        <button type="button" class="btn btn-white btn-block text-gray font-weight-bold animate-up-2"
-                                            tabindex="0"><span class="fas fa-cart-plus mr-3"></span>Add to Cart</button>
-                                    </div>
-                                    <!-- End Content -->
-                                </div>
-                            </div>
-                            <!-- End of Pricing Card -->
-    --}}
