@@ -37,6 +37,8 @@
     <script src="{{ asset("js/admin/chart-area-demo.js") }}"></script>
     <script src="{{ asset("js/admin/chart-pie-demo.js") }}"></script>
 
+    @yield('styles')
+
 </head>
 
 <body id="page-top">
@@ -95,16 +97,16 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
+                    <span>Package</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                        <h6 class="collapse-header">Utilities:</h6>
+                        <a class="collapse-item" href="{{ route('showForm') }}">Create Package</a>
+                        <a class="collapse-item" href="utilities-border.html">View Users</a>
+                        {{-- <a class="collapse-item" href="utilities-animation.html">Animations</a> --}}
+                        {{-- <a class="collapse-item" href="utilities-other.html">Other</a> --}}
                     </div>
                 </div>
             </li>
@@ -377,12 +379,16 @@
 
                 </nav>
                 <!-- End of Topbar -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">@yield('sectionHeading')</h1>
+                        <p class="mb-4">@yield('sectionHeadingInfo')</p>
 
-                <!-- Page Heading -->
 
+                    @yield('content')
+                </div>
+                <!-- /.container-fluid -->
 
-                @yield('content')
-            
             </div>
             <!-- End of Main Content -->
 
