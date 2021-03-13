@@ -35,8 +35,8 @@ class HomeController extends Controller
         if ($logged_in_to_router) {
             return view('home');
         }else{
-            return redirect(route('router_login'));
-            // return view('home');
+            // return redirect(route('router_login'));
+            return view('home');
         }
         //else redirect to router login page
     }
