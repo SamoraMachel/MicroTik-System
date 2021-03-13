@@ -12,7 +12,8 @@
     <title>Microtik Admin - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset("css/admin/all.min.css") }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    {{-- <link href="{{ asset("css/admin/all.min.css") }}" rel="stylesheet" type="text/css"> --}}
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -49,7 +50,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route("home") }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-router"></i>
                 </div>
@@ -374,11 +375,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                </div>
+
 
                 @yield('content')
             

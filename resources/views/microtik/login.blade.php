@@ -18,7 +18,7 @@
                     @if(session('error'))
                         <h3 class="text-danger">{{session('error')}}</h3>
                     @endif
-                    <form method="POST" action="{{ route("router_verify ") }}">
+                    <form method="POST" action="{{ route("router_verify") }}">
 
                         @csrf 
                         <div class="input-group">
