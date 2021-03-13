@@ -5,20 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use RouterOS;
 use App\Models\Profile;
+use \Cookie;
 
 
 class AdminController extends Controller
 {	
-    protected $client;
-    public function __construct(){
-        $this->middleware('session_logged');
-        $this->connection();
-     }
-
-     public function connection(){
-        $config = session('router_session');
+    public $client;
+    public function connection(){        
+        $data = session()->get('router_session');
+        $config = new \RouterOS\Config([
+            'host' => $data['ip'],
+            'user' => $data['username'],
+            'pass' => $data['password'],
+            'port' => intval($data['port']),
+        ]);
         try {
-          $this->client = new RouterOS\Client($config);            
+          $this->client = new RouterOS\Client($config);
          } catch (\Exception $e) {
             dd($e);
         }      
@@ -95,7 +97,8 @@ class AdminController extends Controller
         show form for creating profile
     */
     public function showForm(){
-        return view('admin.profiles.create-profile');
+        $profiles = $this->userProfiles();        
+        return view('admin.profiles.create-profile', compact('profiles'));
     }
 
 
@@ -114,6 +117,7 @@ class AdminController extends Controller
              ->equal('name', $data['name'])
              ->equal('shared-users',$data['shared-users']);
               // Add user
+       $this->connection();
        $response =  $this->client->query($query)->read();
 
        //extend the profile to database
@@ -121,5 +125,19 @@ class AdminController extends Controller
 
        return redirect(route('home'))->with('success','Package added successfully');
     }
+
+    public function userProfiles(){
+      $query = new RouterOS\Query('/ip/hotspot/user/profile/print');
+      $this->connection();      
+      $userProfiles = $this->client->query($query)->read();
+     return $userProfiles;
+   }
+
+   public function ips_connected_to_router(){
+    $query = new RouterOs\Query('/ip/arp/print');
+    $this->connection();
+    $response = $this->client->query($query)->read();
+    dd($response);
+   }
 
 }

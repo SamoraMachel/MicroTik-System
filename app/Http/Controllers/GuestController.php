@@ -39,13 +39,7 @@ class GuestController extends Controller
       }      
    }
 
-   public function userProfiles(){
-      $query = new RouterOS\Query('/ip/hotspot/user/profile/print');
-
-      // Add user
-      $userProfiles = $this->client->query($query)->read();
-      dd($userProfiles);
-   }
+   
 
    public function ipbindings(){
     $query =
@@ -87,27 +81,7 @@ class GuestController extends Controller
       $lipa_na_mpesa_password = base64_encode($BusinessShortCode.$passkey.$lipa_time);
       return $lipa_na_mpesa_password;
    }
-
-   public function ip(){
-    $query = new RouterOs\Query('/ip/arp/print');
-
-    // Send query to RouterOS
-    $response = $this->client->query($query)->read();
-    dd($response);
-   }
+   
 
 }
 
-
-
-
-
-
-// $config = Config([
-//     'host' => env('REMOTE_HOST'),
-//     'user' => env('REMOTE_USER'),
-//     'pass' => env('REMOTE_PASS'),
-//     'port' => env('REMOTE_PORT'),
-//  ]);
-// $client = new Client($config);
-// $this->client =  $client;

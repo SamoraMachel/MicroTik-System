@@ -14,7 +14,12 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{\App\Models\Profile::all()}}
+
+                    {{\App\Models\User::all()}}
+
+                    <hr>
+                    {{dd(request()->session()->get('router_session'))}}
                 </div>
             </div>
         </div>

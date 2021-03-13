@@ -17,16 +17,16 @@ class SessionLoginMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-          if($request->session()->exists('router_session')){
-              return $next($request);
-          }else{
-              return redirect('home');
-          }  
-        }
-        else{
-            return redirect('/login');
-        }
+        // if (Auth::check()) {
+        //   if(){
+        //       return $next();
+        //   }else{
+        //       return redirect('home');
+        //   }  
+        // }
+        // else{
+        //     return redirect('/login');
+        // }
         
         
     }

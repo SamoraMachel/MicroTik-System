@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', [App\Http\Controllers\GuestController::class, 'newProfile']);
+Route::get('/test',[App\Http\Controllers\AdminController::class, 'ips_connected_to_router']);
 Route::get('/', [App\Http\Controllers\GuestController::class, 'welcome']);
 
 Auth::routes();
@@ -30,6 +30,3 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/router_verify', [App\Http\Controllers\HomeController::class, 'init'])->name('router_verify');
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

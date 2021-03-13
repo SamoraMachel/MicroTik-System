@@ -35,13 +35,16 @@ class HomeController extends Controller
         if ($logged_in_to_router) {
             return view('home');
         }else{
-            // return redirect(route('router_login'));
-            return view('home');
+            return redirect(route('router_login'));
+            //return view('home');
         }
         //else redirect to router login page
     }
 
-    public function routerLogin(){
+    public function routerLogin(Request $request){
+        if($request->session()->exists('router_session')){
+            return redirect(route('home'));
+        }
         return view('microtik.login');
     }
 
@@ -65,10 +68,10 @@ class HomeController extends Controller
         try {
           $client = new RouterOS\Client($config);            
          } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e);
-        }
-        $request->session()->put('router_session', $client);
-        return redirect('/home');
+            return redirect()->back()->with('error', 'Hello '.auth()->user()->name.', For Some reason, We Could not login you  to the router');
+        }        
+        session(['router_session' => $data]);
+        return redirect(route('home'))->with();
 
     }
 }
