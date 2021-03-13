@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', [App\Http\Controllers\GuestController::class, 'lipaNaMpesaPassword']);
+Route::get('/', function(){
+	return view('welcome');
+});
 
 Auth::routes();
 
