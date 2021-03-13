@@ -18,7 +18,6 @@
      <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Styles -->
     @yield('styles')
-   
 </head>
 <body>
     <div id="app">

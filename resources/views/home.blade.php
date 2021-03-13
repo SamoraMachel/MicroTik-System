@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.sidenav')
 
 @section('content')
 <div class="container">

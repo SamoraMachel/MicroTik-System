@@ -29,9 +29,9 @@
   }
   
   .col-2 {
-    width: 70%;
-    width: 70%;
-    width: 70%;
+    width: 100%;
+    width: 100%;
+    width: 100%;
   }
   
   @media (max-width: 767px) {
@@ -472,7 +472,7 @@
   }
   
   .card-2 .card-heading {
-    background: url("../images/bg-heading-02.jpg") top left/cover no-repeat;
+    background: url("../img/Microtik_logo2.jpg") top left/cover no-repeat;
     width: 29.1%;
     display: table-cell;
   }
