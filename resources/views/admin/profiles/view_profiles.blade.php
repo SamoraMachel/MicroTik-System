@@ -1,5 +1,10 @@
 @extends('sidenav')
 
+@section('section-Head')
+    Connected Users
+@endsection
+
+
 @section('contentMain')
 
     <!-- DataTales Example -->

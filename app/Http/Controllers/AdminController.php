@@ -141,7 +141,9 @@ class AdminController extends Controller
    }
 
    public function listProfiles(){
-    $profiles = Profile::all();
+    $query = new RouterOS\Query('/ip/hotspot/user/profile/print');
+    $this->connection();      
+    $profiles = $this->client->query($query)->read();
     return view('admin.profiles.show-profiles', compact('profiles'));
    }
 
