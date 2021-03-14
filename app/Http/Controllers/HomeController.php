@@ -71,7 +71,7 @@ class HomeController extends Controller
             return redirect()->back()->with('error', 'Hello '.auth()->user()->name.', For Some reason, We Could not login you  to the router');
         }        
         session(['router_session' => $data]);
-        return redirect(route('home'))->with();
+        return redirect(route('home'));
 
     }
 }

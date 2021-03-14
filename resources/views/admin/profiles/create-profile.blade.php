@@ -22,28 +22,43 @@
                     <div class="input-group">
                         <input class="input--style-2" type="text" placeholder="Package Name" name="name" value={{ @old('name') }}>
                         @error('name')
-                            <span class="text-danger">{{$message}}</span>
+                            <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="input-group">
-                        <input class="input--style-2" type="text" placeholder="Shared Users" name="shared-users" value={{ @old('username') }}>
+                        <input class="input--style-2" type="text" placeholder="Shared Users" name="shared-users" value={{ @old('shared-users') }}>
+                        @error('shared-users')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="input-group">
-                        <input class="input--style-2" type="text" placeholder="Rate Limit" name="rate-limit" value={{ @old('username') }}>
+                        <input class="input--style-2" type="text" placeholder="Rate Limit" name="rate-limit" value={{ @old('rate-limit') }}>
+                        @error('rate-limit')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="input-group">
-                        <input class="input--style-2" type="number" placeholder="Price" name="price" value={{ @old('port') }}>
+                        <input class="input--style-2" type="number" placeholder="Price" name="price" value={{ @old('price') }}>
+                        @error('price')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="input-group">
-                        <input class="input--style-2" type="text" placeholder="Status Autofresh" name="status-autofresh" value={{ @old('username') }}>
+                        <input class="input--style-2" type="text" placeholder="Status Autofresh" name="status-autofresh" value={{ @old('status-autofresh') }}>
+                        @error('status-autofresh')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="input-group">
-                        <input class="input--style-2" type="text" placeholder="Transparency Proxy" name="transparency-proxy" value={{ @old('username') }}>
+                        <input class="input--style-2" type="text" placeholder="Transparency Proxy" name="transparency-proxy" value={{ @old('transparency-proxy') }}>
+                        @error('transparency-proxy')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <div class="p-t-30">
