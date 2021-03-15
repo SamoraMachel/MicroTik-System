@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use RouterOS;
 use Carbon\Carbon;
 use App\Models\Profile;
-use Mpesa;
+use App\Helpers\Mpesa;
 
 class GuestController extends Controller
 { 
@@ -44,18 +44,12 @@ class GuestController extends Controller
       $amount=$data['amount'];
       $msisdn=$data['phone_number'];     
       $TransactionDesc='Payment for '.$package->name.' package';
-      $response = $this->mpesa($amount, $msisdn, $TransactionDesc);
+      $response = Mpesa::sendSTKPush($amount, $msisdn, $TransactionDesc);
       return $response;
 
-   }
-
-   public function mpesa(int $amount, int $msisdn, $TransactionDesc){
-    $response = Mpesa::express(intval($amount), intval($msisdn), $TransactionDesc);    
-    if ($response) {
-      return "Success";
-    }else{
-      return "Error";
-    }
+   }   
+   public function responseFromMpesa(Request $request){
+    dd('called');
    }
 }
 
