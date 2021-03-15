@@ -23,7 +23,7 @@ class Mpesa
 		 $this->consumer_secret = env('CONSUMER_SECRET',null);
 		 $this->consumer_key = env('CONSUMER_KEY',null);
 		 $this->env = env('MPESA_ENV',null);
-		 $this->url = 'https://localhost.com/mpesa_response';
+		 $this->url = 'https://e24de1f87f7b.ngrok.io/mpesa_response';
 		 $this->access_token = $this->getAccessToken();		 
 		 $this->passkey = env('PASS_KEY');
 	}
@@ -79,11 +79,11 @@ class Mpesa
 		    'BusinessShortCode' => $this->short_code,
 		    'Password' => $this->getLipaNaMpesapassword(),
 		    'Timestamp' => Carbon::rawParse('now')->format('YmdHms'),
-		    'TransactionType' => 'CustomerPayBillOnline',
+		    'TransactionType' => 'CustomerBuyGoodsOnline',
 		    'Amount' => intval($amount),
 		    'PartyA' => intval($phone_number), // replace this with your phone number
 		    'PartyB' => $this->short_code,
-		    'PhoneNumber' => intval($phone_number), // replace this with your phone number
+		    'PhoneNumber' => $phone_number, // replace this with your phone number
 		    'CallBackURL' => $this->url,
 		    'AccountReference' => "Package Purchase",
 		    'TransactionDesc' => $TransactionDesc,
