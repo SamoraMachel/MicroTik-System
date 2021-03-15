@@ -20,8 +20,7 @@ class CreateProfilesTable extends Migration
             $table->string('shared-users');
             $table->string('rate-limit')->nullable();
             $table->string('price');
-            $table->string('status-autorefresh')->nullable();
-            $table->string('transparent-proxy')->nullable();
+            $table->json('description')->nullable();
         });
     }
 

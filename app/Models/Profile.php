@@ -13,7 +13,7 @@ class Profile extends Model
 	'shared-users',
 	'rate-limit',
 	'price',
-	'status-autorefresh',
-	'transparent-proxy',
+	'description'
+
 ];
 }

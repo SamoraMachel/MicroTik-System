@@ -36,9 +36,8 @@ class HomeController extends Controller
             return view('home');
         }else{
             return redirect(route('router_login'));
-            //return view('home');
         }
-        //else redirect to router login page
+
     }
 
     public function routerLogin(Request $request){

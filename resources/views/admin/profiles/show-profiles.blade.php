@@ -12,8 +12,9 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
+            
+            <table class="display nowrap table table-hover table-striped table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example23_info" style="width: 100%;">
+                <thead >
                     <tr>
                         <th>Name</th>
                         <th>Keep Alive</th>
@@ -22,7 +23,7 @@
                         <th>Idle Timeout</th>
                         <th>Transparent Proxy</th>
                         <th>Mac Timeout</th>
-                        <th>Address Pool</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -42,7 +43,7 @@
                     @foreach ($profiles as $item)
                         
                         <tr>
-                            <td class="text-success"> 
+                            <td class=""> 
                                 <b>{{ isset($item["name"])? ucfirst($item["name"]): "" }}</b>
                             </td>
                             <td> {{ isset($item["keepalive-timeout"])? $item["keepalive-timeout"]: "" }} </td>
@@ -51,7 +52,9 @@
                             <td> {{ isset($item["idle-timeout"])? $item["idle-timeout"]: "" }} </td>
                             <td> {{ isset($item["transparent-proxy"])? $item["transparent-proxy"]: "" }} </td>
                             <td> {{ isset($item["mac-cookie-timeout"])? $item["mac-cookie-timeout"]: "" }} </td>
-                            <td> {{ isset($item["address-pool"])? $item["address-pool"]: "" }} </td>
+                            <td>
+                                <a href="#"> </a>
+                            </td>
                         </tr>
 
                     @endforeach

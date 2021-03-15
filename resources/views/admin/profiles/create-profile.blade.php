@@ -48,15 +48,9 @@
                     </div>
 
                     <div class="input-group">
-                        <input class="input--style-2" type="text" placeholder="Status Autofresh" name="status-autofresh" value={{ @old('status-autofresh') }}>
-                        @error('status-autofresh')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="input-group">
-                        <input class="input--style-2" type="text" placeholder="Transparency Proxy" name="transparency-proxy" value={{ @old('transparency-proxy') }}>
-                        @error('transparency-proxy')
+                        <input class="input--style-2" type="text" placeholder="Description" name="description"}}>
+                        
+                        @error('description')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
