@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test',[App\Http\Controllers\AdminController::class, 'userProfiles']);
+// Route::get('/test',[App\Http\Controllers\GuestController::class, 'customerMpesaSTKPush']);
 Route::get('/', [App\Http\Controllers\GuestController::class, 'welcome']);
-
+Route::post('/customer/purchase',[App\Http\Controllers\GuestController::class, 'purchase'])->name('purchase');
 Auth::routes();
+
+Route::get('/mpesa_response',[App\Http\Controllers\AdminController::class, 'responseFromMpesa'])->name('mpesa_response');
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

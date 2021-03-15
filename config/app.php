@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         RouterOS\Laravel\ServiceProvider::class,
+        Gathuku\Mpesa\MpesaServiceProvider::class,
 
     ],
 
@@ -227,6 +228,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Mpesa' => Gathuku\Mpesa\Facades\Mpesa::class,
 
     ],
 

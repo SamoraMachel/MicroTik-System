@@ -12,6 +12,7 @@
         "evilfreelancer/routeros-api-php": "^1.4",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
+        "gathuku/laravelmpesa": "^1.2",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/cashier": "^12.9",
         "laravel/framework": "^8.12",
