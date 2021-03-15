@@ -108,20 +108,31 @@ class AdminController extends Controller
        'shared-users'=>'required|numeric',
        'rate-limit' =>'nullable',
        'price'=>'required|numeric',
-       'status-autorefresh'=>'nullable',
-       'transparent-proxy'=>'nullable',
+       'description'=>'nullable',
      ]);
+
+    $descrip = explode(";", $data['description']);
+    $descripJSON = json_encode($descrip);
      //save the profile to router
      $query =
          (new RouterOs\Query('/ip/hotspot/user/profile/add'))
              ->equal('name', $data['name'])
-             ->equal('shared-users',$data['shared-users']);
+             ->equal('shared-users',$data['shared-users'])
+             ->equal('rate-limit', $data['rate-limit']);
               // Add user
        $this->connection();
        $response =  $this->client->query($query)->read();
 
+
+    //    dd($descripJSON);
        //extend the profile to database
-       $newResponse = Profile::create($data);
+       $newResponse = Profile::create([
+           'name'=>$data['name'],
+           'shared-users'=>$data['shared-users'],
+           'rate-limit'=>$data['rate-limit'],
+           'price'=>$data['price'],
+           'description'=>$descripJSON
+       ]);
 
        return redirect(route('home'))->with('success','Package added successfully');
     }

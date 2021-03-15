@@ -17,7 +17,7 @@ class GuestController extends Controller
 
    public function welcome(){
     $packages = Profile::all();
-    return view('welcome', compact($packages));
+    return view('welcome', compact('packages'));
    }
 
    public function connection(){
