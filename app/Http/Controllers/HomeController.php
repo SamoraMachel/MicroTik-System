@@ -29,7 +29,7 @@ class HomeController extends Controller
         if($request->session()->exists('router_session')){
             $logged_in_to_router =true;
         }else{
-            $logged_in_to_router =true;
+            $logged_in_to_router =false;
         }
         //if you logged in to router 
         if ($logged_in_to_router) {
