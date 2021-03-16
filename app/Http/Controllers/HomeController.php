@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \RouterOS;
+use App\Models\MicroTik;
 
 class HomeController extends Controller
 {
@@ -72,5 +73,25 @@ class HomeController extends Controller
         session(['router_session' => $data]);
         return redirect(route('home'));
 
+    }
+    public function router_auto_login(Request $request, MicroTik $microtik){
+        if($request->session()->exists('router_session')){
+           $request->session()->forget('router_session');
+        }
+        $router = $microtik;
+        $config = new \RouterOS\Config([
+            'host' => $router->ip,
+            'user' => $router->username,
+            'pass' => $router->password,
+            'port' => intval($router->port),
+        ]);
+
+        try {
+          $client = new RouterOS\Client($config);            
+         } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Hello '.auth()->user()->name.', For Some reason, We Could not login you  to the'. $router->name.' router');
+        }        
+        session(['router_session' => $router]);
+        return redirect(route('home'));
     }
 }

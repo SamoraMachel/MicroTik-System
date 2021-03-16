@@ -134,8 +134,8 @@
                                 <div class="row">
                                     <div class="col-lg-12 m-0 ">
                                         
-                                        {{-- First Router in the list --}}
-                                    <div class="col-lg-12 pb-3">
+                                   {{-- First Router in the list --}}
+                                    {{-- <div class="col-lg-12 pb-3">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="icon-contain">
@@ -153,18 +153,19 @@
                                                 </div><!--end icon-contain-->
                                             </div><!--end card-body-->
                                         </div><!--end card-->
-                                    </div>
+                                    </div> --}}
 
                                     {{-- Second Router in the list --}}
+                                    @foreach(\App\Models\MicroTik::all() as $microtik)
                                     <div class="col-lg-12 pb-3">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="icon-contain">
                                                     <div class="row">
                                                         <div class="col-8 align-self-center">
-                                                            <a href="#"><h4 class="mb-3">Ijab Hotspot</h4></a>
+                                                            <a href="{{route('router_auto_login', $microtik->id)}}"><h4 class="mb-3">{{$microtik->name}}</h4></a>
                                                             <p class="h6 m-0 text-dark">Kakamega</p>
-                                                            <p class="text-muted mb-0">Router-9b51g1 <i class="mdi mdi-menu-down text-danger font-16"></i></p>
+                                                            <p class="text-muted mb-0">Router-{{$microtik->ip}} <i class="mdi mdi-menu-down text-danger font-16"></i></p>
                                                         </div><!--end col-->
                                                         <div class="col-4">
                                                             <span class="peity-line" data-width="100%" data-peity="{ &quot;fill&quot;: [&quot;#0dc8de24&quot;],&quot;stroke&quot;: [&quot;#0dc8de&quot;]}" data-height="50" style="display: none;">6,2,8,4,3,8,1,3,6,5,9,2,8,1,4,8,9,8,2,1</span>
@@ -175,6 +176,7 @@
                                             </div><!--end card-body-->
                                         </div><!--end card-->
                                     </div>
+                                    @endforeach
 
                                     </div>
                                     

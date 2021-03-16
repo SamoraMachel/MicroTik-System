@@ -7,6 +7,7 @@ use RouterOS;
 use Carbon\Carbon;
 use App\Models\Profile;
 use App\Helpers\Mpesa;
+use App\Models\Mpesaresponse;
 
 class GuestController extends Controller
 { 
@@ -50,15 +51,18 @@ class GuestController extends Controller
 
    }   
    public function responseFromMpesa(Request $request){
-
-    return $request;
-    //$newTransaction = new Mpesa;
-    //$saveTransation = $newTransaction->mpesaConfirmation($request);
-    // $writer = fopen('/trials/data.txt',"w") or die("problem creating file");
-    // $line = $request->json_decode($request->getContent());
-    // fwrite($writer, $line);
-    // fclose($writer);
-    return;
+      $body= $request->getContent();
+      $data = json_decode($body);
+      $newreponse = new Mpesaresponse;
+      $newreponse->body = $data->body;
+      $newreponse->save();
+      return;
    }
+
+   public function trial(){
+    $res = Mpesaresponse::find(2);
+    $data = json_decode($res->body, true);
+    dd($data->stkCallback);
+}
 }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class MicrotikDatabase extends Migration
+class CreateMpesaresponsesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,11 @@ class MicrotikDatabase extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('mpesaresponses', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->text('body');
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class MicrotikDatabase extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('mpesaresponses');
     }
 }

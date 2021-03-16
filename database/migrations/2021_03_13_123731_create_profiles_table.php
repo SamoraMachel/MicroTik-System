@@ -21,6 +21,7 @@ class CreateProfilesTable extends Migration
             $table->string('rate-limit')->nullable();
             $table->string('price');
             $table->json('description')->nullable();
+            $table->unsignedBigInteger('micro_tik_id')->nullable();
         });
     }
 
