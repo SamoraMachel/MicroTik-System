@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use RouterOS;
 use Carbon\Carbon;
 use App\Models\Profile;
-use Mpesa;
+use App\Helpers\Mpesa;
 
 class GuestController extends Controller
 { 
@@ -38,24 +38,27 @@ class GuestController extends Controller
    public function purchase(Request $request){
       $data = $this->validate($request, [
         'phone_number'=>['required','numeric','digits:12','starts_with:254'],
-        'id'=>['exists:profiles','required'],
+        'id'=>['exists:profiles','required'],        
       ]);
       $package = Profile::find($data['id']);
-      $amount=$data['amount'];
+      $amount=$package->price;
       $msisdn=$data['phone_number'];     
       $TransactionDesc='Payment for '.$package->name.' package';
-      $response = $this->mpesa($amount, $msisdn, $TransactionDesc);
+      $newTrial = new Mpesa;
+      $response = $newTrial->sendSTKPush($amount, $msisdn, $TransactionDesc);
       return $response;
 
-   }
+   }   
+   public function responseFromMpesa(Request $request){
 
-   public function mpesa(int $amount, int $msisdn, $TransactionDesc){
-    $response = Mpesa::express(intval($amount), intval($msisdn), $TransactionDesc);    
-    if ($response) {
-      return "Success";
-    }else{
-      return "Error";
-    }
+    return $request;
+    //$newTransaction = new Mpesa;
+    //$saveTransation = $newTransaction->mpesaConfirmation($request);
+    // $writer = fopen('/trials/data.txt',"w") or die("problem creating file");
+    // $line = $request->json_decode($request->getContent());
+    // fwrite($writer, $line);
+    // fclose($writer);
+    return;
    }
 }
 

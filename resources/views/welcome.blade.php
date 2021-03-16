@@ -29,7 +29,7 @@
         <link href="{{ asset('css/routerLogin.css') }}" rel="stylesheet" media="all">
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
+        <div id="app" class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
             {{-- @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
@@ -101,9 +101,10 @@
                                                     @endif
                                                     
                                                 </ul>
-                                                <button id="{{ $package['id'] }}" type="button" class="btn btn-white btn-block text-dark font-weight-bold animate-up-2"
+                                                <pay-button :sel_package="{{$package}}"/>
+                                                {{-- <button id="{{ $package['id'] }}" type="button" class="btn btn-white btn-block text-dark font-weight-bold animate-up-2"
                                                     tabindex="0" data-toggle="modal" data-target="#myModal">
-                                                    <span class="fas fa-money-check-alt" ></span> Purchase </button>
+                                                    <span class="fas fa-money-check-alt" ></span> Purchase </button> --}}
                                             </div>
 
                                             <!-- Modal -->
@@ -136,7 +137,7 @@
                             <h4 class="modal-title">Phone Number: </h4>
                             </div>
                             <div class="modal-body">
-                                <form action="" method="post">
+                                <form action="{{route('purchase')}}" method="post">
                                     
                                     @csrf 
                                     <div class="input-group">
