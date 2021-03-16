@@ -5,8 +5,12 @@
 		 <span class="fas fa-money-check-alt" ></span> Purchase </button>
 		 <Modal v-model="purchaseModal" :closable="false" :mask-closable="false" :width="85">
 		 	<div slot="header">Purchase Subscription</div>
-		 	<div class="input-group">
-		 	    <input class="input--style-2" type="text" placeholder="Enter Your Phone Number: " v-model="data.phone_number">
+		 	<div class="row justify-content-center">
+		 		<div class="col-sm-9">
+		 			<div class="input-group">
+		 				<input class="input--style-2" type="text" placeholder="Enter Your Phone Number: " v-model="data.phone_number">
+		 			</div>
+		 		</div>
 		 	</div>
 		 	<div slot="footer">
 		 		<button class="btn btn--radius btn--green" @click="purchaseModal=false">Cancel</button>
@@ -42,10 +46,14 @@
 					return this.e('Phone Number is required')
 				}
 
-				const res = await this.callApi('post', '/customer/purchase', this.data)
-				console.log(res)
+				const res = await this.callApi('post', '/customer/purchase', this.data)				
 				if (res.status == 200) {
-					this.s('Purchase Initiated,check your phone')
+					console.log(res.data)
+					if (res.data.ResponseCode == 0) {
+						this.s('Purchase Initiated,check your phone')
+					}else{
+						this.i('Problem Encountered During Purchase. Please Try Again')
+					}
 					this.data.id=''
 					this.purchaseModal = false
 					this.isSaving = false

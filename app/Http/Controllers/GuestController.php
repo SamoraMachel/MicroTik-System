@@ -50,7 +50,15 @@ class GuestController extends Controller
 
    }   
    public function responseFromMpesa(Request $request){
-    dd('called');
+
+    return $request;
+    //$newTransaction = new Mpesa;
+    //$saveTransation = $newTransaction->mpesaConfirmation($request);
+    // $writer = fopen('/trials/data.txt',"w") or die("problem creating file");
+    // $line = $request->json_decode($request->getContent());
+    // fwrite($writer, $line);
+    // fclose($writer);
+    return;
    }
 }
 

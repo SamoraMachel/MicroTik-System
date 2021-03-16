@@ -110,6 +110,22 @@
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdmins"
+                    aria-expanded="true" aria-controls="collapseAdmins">
+                    <i class="fas fa-cubes"></i>
+                    <span>MIcroTik Admins</span>
+                </a>
+                <div id="collapseAdmins" class="collapse" aria-labelledby="AdminUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Functions:</h6>
+                        <a class="collapse-item" href="{{ route('admin.index') }}">View Admins</a>
+                        <a class="collapse-item" href="{{ route("admin.create") }}">Add Admins</a>                        
+                    </div>
+                </div>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 

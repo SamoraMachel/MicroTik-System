@@ -17,15 +17,19 @@ class Mpesa
 	public $access_token;
 	public $passkey;	
 	public $url;
+	public $validation_url;
+	public $confirmation_url;
 
 	public function __construct(){
 		 $this->short_code = env('TILL_NUMBER',null);
 		 $this->consumer_secret = env('CONSUMER_SECRET',null);
 		 $this->consumer_key = env('CONSUMER_KEY',null);
 		 $this->env = env('MPESA_ENV',null);
-		 $this->url = 'https://e24de1f87f7b.ngrok.io/mpesa_response';
+		 $this->url = 'https://335b2a1af371.ngrok.io/mpesa_response';
 		 $this->access_token = $this->getAccessToken();		 
 		 $this->passkey = env('PASS_KEY');
+		 $this->validation_url = 'https://335b2a1af371.ngrok.io/validation';
+		 $this->confirmation_url='https://335b2a1af371.ngrok.io/confirmation';
 	}
 
 	public function getAccessToken(){		
@@ -79,7 +83,7 @@ class Mpesa
 		    'BusinessShortCode' => $this->short_code,
 		    'Password' => $this->getLipaNaMpesapassword(),
 		    'Timestamp' => Carbon::rawParse('now')->format('YmdHms'),
-		    'TransactionType' => 'CustomerBuyGoodsOnline',
+		    'TransactionType' => 'CustomerPayBillOnline',
 		    'Amount' => intval($amount),
 		    'PartyA' => intval($phone_number), // replace this with your phone number
 		    'PartyB' => $this->short_code,
@@ -99,8 +103,8 @@ class Mpesa
 	       /**
 	        * M-pesa Transaction confirmation method, we save the transaction in our databases
 	        */
-	public function mpesaConfirmation(Request $request){
-		dd("Called");
+	public function mpesaConfirmation($request){
+		//dd("Called");
 	    $content=json_decode($request->getContent());
 	    $mpesa_transaction = new MpesaTransaction();
 	    $mpesa_transaction->TransactionType = $content->TransactionType;
@@ -123,4 +127,43 @@ class Mpesa
 	    $response->setContent(json_encode(["C2BPaymentConfirmationResult"=>"Success"]));
 	           return $response;
 	}
+
+	public function mpesaValidation(Request $request){
+	        $result_code = "0";
+	        $result_description = "Accepted validation request.";
+	        return $this->createValidationResponse($result_code, $result_description);
+	}
+
+	public function createValidationResponse($result_code, $result_description){
+	       $result=json_encode(["ResultCode"=>$result_code, "ResultDesc"=>$result_description]);
+	       $response = new Response();
+	       $response->headers->set("Content-Type","application/json; charset=utf-8");
+	       $response->setContent($result);
+	       return $response;
+	}
+
+	
+	  public function mpesaRegisterUrls()
+	  {
+	  	if ($this->env == 'sandbox') {
+	  		$url = 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl';
+	  	}else{
+			$url = "https://api.safaricom.co.ke/mpesa/c2b/v1/registerurl";
+	  	}
+	      $curl = curl_init();
+	      curl_setopt($curl, CURLOPT_URL, $url);
+	      curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Authorization: Bearer '. $this->access_token));
+	      curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+	      curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	      curl_setopt($curl, CURLOPT_POST, true);
+	      curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode(array(
+	          'ShortCode' => $this->short_code,
+	          'ResponseType' => 'Completed',
+	          'ConfirmationURL' => $this->confirmation_url,
+	          'ValidationURL' => $this->validation_url
+	      )));
+	      $curl_response = curl_exec($curl);
+	      echo $curl_response;
+	  }
+
 }
