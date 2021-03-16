@@ -19,17 +19,26 @@ class Mpesa
 	public $url;
 	public $validation_url;
 	public $confirmation_url;
+	public $app_env;
+	public $base_url;	
 
 	public function __construct(){
 		 $this->short_code = env('TILL_NUMBER',null);
 		 $this->consumer_secret = env('CONSUMER_SECRET',null);
 		 $this->consumer_key = env('CONSUMER_KEY',null);
-		 $this->env = env('MPESA_ENV',null);
-		 $this->url = 'https://335b2a1af371.ngrok.io/mpesa_response';
-		 $this->access_token = $this->getAccessToken();		 
-		 $this->passkey = env('PASS_KEY');
-		 $this->validation_url = 'https://335b2a1af371.ngrok.io/validation';
-		 $this->confirmation_url='https://335b2a1af371.ngrok.io/confirmation';
+		 $this->env = env('MPESA_ENV',null);		 	 
+		 $this->passkey = env('PASS_KEY');		 
+		 $this->app_env = env('APP_ENV');
+		 if ($this->app_env == 'production') {
+		 	 $this->base_url = env('APP_URL');
+		 	 $this->url = $this->base_url.'/mpesa_response';
+		 }else{
+		 	$this->base_url = 'https://e7b03de3086c.ngrok.io';
+		 	$this->url = $this->base_url.'/mpesa_response';
+		 }
+		 $this->validation_url = $this->base_url.'/validation';
+		 $this->confirmation_url=$this->base_url.'/confirmation';
+		 $this->access_token = $this->getAccessToken();	
 	}
 
 	public function getAccessToken(){		
