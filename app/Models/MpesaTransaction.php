@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class MpesaTransaction extends Model
 {
     use HasFactory;
+    protected $fillable = [
+    	'amount',
+    	'MpesaReceiptNumber',
+    	'TransactionDate',
+    	'PhoneNumber',
+    	'status',
+    ];
 }

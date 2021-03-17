@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\Profile;
 use App\Helpers\Mpesa;
 use App\Models\Mpesaresponse;
+use App\Models\MpesaTransaction;
 
 class GuestController extends Controller
 { 
@@ -53,16 +54,62 @@ class GuestController extends Controller
    public function responseFromMpesa(Request $request){
       $body= $request->getContent();
       $data = json_decode($body);
-      $newreponse = new Mpesaresponse;
-      $newreponse->body = $data->body;
-      $newreponse->save();
+      $newreponse = Mpesaresponse::create([
+        'body'=>$body
+      ]);
+      $this->create_subscription($newreponse->id);
       return;
    }
 
-   public function trial(){
-    $res = Mpesaresponse::find(2);
+   public function create_subscription($id){
+    $res = Mpesaresponse::find($id);
     $data = json_decode($res->body, true);
-    dd($data->stkCallback);
-}
+    $body = $data['Body'];
+    $stkCallback=$body['stkCallback'];
+    $ResultCode =$stkCallback['ResultCode']; 
+    if ($ResultCode == 0) {
+      $CallbackMetadata = $stkCallback['CallbackMetadata'];
+      $Items = $CallbackMetadata['Item'];
+      $amount = $Items[0]['Value'];
+      $MpesaReceiptNumber = $Items[1]['Value'];      
+      $TransactionDate = strval($Items[2]['Value']);
+      $PhoneNumber = strval($Items[3]['Value']);
+
+      $create_transaction = new MpesaTransaction;
+      $create_transaction->amount= $amount;
+      $create_transaction->MpesaReceiptNumber=$MpesaReceiptNumber;
+      $create_transaction->TransactionDate=$TransactionDate;
+      $create_transaction->PhoneNumber=$PhoneNumber;
+
+      //get a profile from router with price 100
+      $profile = Profile::where('price', $amount)->first();
+      if ($profile) {
+        //create a user
+        $this->create_user($PhoneNumber, $MpesaReceiptNumber, $profile->name);
+        $create_transaction->status = "Conected To Network SuccessFully";
+      }
+      else{
+        $create_transaction->status = "Not Conected To Network, Error! Missing Profile ";
+      }
+
+      $create_transaction->save();
+      return;
+
+    } 
+    else{
+      return;
+    }
+  }
+
+  public function create_user($name, $password, $profile){
+    $query = (new RouterOs\Query('/ip/hotspot/user/add'))
+      ->equal('name', $name)
+      ->equal('password',$password)
+      ->equal('profile', $profile);
+    $response = $this->client->query($query)->read();
+   return;
+
+  }
+
 }
 

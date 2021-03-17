@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test',[App\Http\Controllers\GuestController::class, 'trial']);
+// Route::get('/test',[App\Http\Controllers\AdminController::class, 'interfaces']);
 Route::get('/', [App\Http\Controllers\GuestController::class, 'welcome']);
 Route::post('/customer/purchase',[App\Http\Controllers\GuestController::class, 'purchase'])->name('purchase');
 Auth::routes(['register'=>false]);

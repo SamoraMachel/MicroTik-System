@@ -98,7 +98,7 @@ class Mpesa
 		    'PartyB' => $this->short_code,
 		    'PhoneNumber' => $phone_number, // replace this with your phone number
 		    'CallBackURL' => $this->url,
-		    'AccountReference' => "Package Purchase",
+		    'AccountReference' => "ASE WirelessPackage Purchase",
 		    'TransactionDesc' => $TransactionDesc,
 		     ];
 		     $data_string = json_encode($curl_post_data);
