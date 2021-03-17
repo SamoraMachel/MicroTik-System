@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \RouterOS;
 use App\Models\MicroTik;
+use App\Models\MpesaTransaction;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -34,7 +36,10 @@ class HomeController extends Controller
         }
         //if you logged in to router 
         if ($logged_in_to_router) {
-            return view('home');
+            $todayEarnings = $this->calculateDailyTotal(); 
+            $thisMonthEarnings = $this->calculateThisMonthTotal();
+
+            return view('home', compact('todayEarnings','thisMonthEarnings'));
         }else{
             return redirect(route('router_login'));
         }
@@ -93,5 +98,13 @@ class HomeController extends Controller
         }        
         session(['router_session' => $router]);
         return redirect(route('home'));
+    }
+
+    public function calculateDailyTotal(){
+        return MpesaTransaction::whereDate('created_at', Carbon::today())->sum('amount');
+    }
+
+    public function calculateThisMonthTotal(){
+        return MpesaTransaction::whereDate('created_at', Carbon::now()->month)->sum('amount');
     }
 }

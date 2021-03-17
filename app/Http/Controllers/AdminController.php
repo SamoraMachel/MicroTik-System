@@ -7,6 +7,7 @@ use RouterOS;
 use App\Models\Profile;
 use \Cookie;
 use App\Models\MicroTik;
+use App\Models\MpesaTransaction;
 
 class AdminController extends Controller
 {	
@@ -199,6 +200,12 @@ class AdminController extends Controller
     $this->connection();        
     $interfaces = $this->client->query($query)->read(); 
     return $interfaces;
+   }
+
+
+   // Transaction functions
+   public function allTransactions(){
+    return MpesaTransaction::all();
    }
 
 
